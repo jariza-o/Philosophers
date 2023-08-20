@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:58:45 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/08/17 16:24:31 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/08/20 12:10:28 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,30 @@ int	ft_strcmp(char *s1, char *s2)
 	while (s1[c] == s2[c] && s1[c] != '\0' && s2[c] != '\0')
 		c++;
 	return ((unsigned char)(s1[c]) - (unsigned char)(s2[c]));
+}
+
+int	ft_atoi(const char *str)
+{
+	int	count;
+	int	signo;
+	int	buffer;
+
+	count = 0;
+	signo = 1;
+	buffer = 0;
+	while ((str[count] >= '\t' && str[count] <= '\r')
+		|| str[count] == 32)
+		count++;
+	if (str[count] == 43 || str[count] == 45)
+	{
+		if (str[count] == 45)
+			signo *= -1;
+		count++;
+	}
+	while (str[count] >= '0' && str[count] <= '9')
+	{
+		buffer = (str[count] - '0') + (buffer * 10);
+		count++;
+	}
+	return (signo * buffer);
 }
