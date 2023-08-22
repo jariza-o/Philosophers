@@ -6,10 +6,13 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 13:19:31 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/08/20 13:22:48 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/08/21 13:37:33 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philosophers.h"
 
-void
+void	ft_init(t_philo *philo)
+{
+	
+}
