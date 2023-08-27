@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:45:30 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/08/26 19:06:37 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/08/27 11:59:42 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <pthread.h>
+
+typedef enum e_error
+{
+	ERROR,
+}	t_error;
 
 typedef struct s_info
 {
