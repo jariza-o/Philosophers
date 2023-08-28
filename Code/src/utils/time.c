@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arguments.c                                        :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/20 12:57:35 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/08/28 16:24:46 by jariza-o         ###   ########.fr       */
+/*   Created: 2023/08/28 13:42:32 by jariza-o          #+#    #+#             */
+/*   Updated: 2023/08/28 13:58:50 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philosophers.h"
 
-void	ft_argv_to_info(char **argv, t_philo *philo)
+long long	ft_get_time_ms(void)
 {
-	philo->philosophers->n_philosophers = ft_atoi(argv[1]);
-	philo->philosophers->t_die = ft_atoi(argv[2]);
-	philo->philosophers->t_eat = ft_atoi(argv[3]);
-	philo->philosophers->t_sleep = ft_atoi(argv[4]);
-	if (argv[5]) //ver si así es correcto
-		philo->philosophers->t_all_eat = ft_atoi(argv[5]);
-	else
-		philo->philosophers->t_all_eat = NULL; // ver si esto es asi, sino poner numero negativo
+	struct timeval	*time; //estructura de la librería sys/time.h, devuelve el tiempo desde el EPOH en seg y micro seg
+
+	gettimeofday(time, NULL);
+	return ((time->tv_sec * 1000) + (time->tv_usec / 1000));
+}
+
+long long	ft_get_actual_time(t_philo *philo)
+{
+	return (ft_get_time_ms() - philo->t_start);
 }
