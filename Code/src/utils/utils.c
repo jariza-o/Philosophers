@@ -6,11 +6,11 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:58:45 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/08/20 12:10:28 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/08/29 18:35:47 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philosophers.h"
+#include "../../include/philosophers.h"
 
 int	ft_strcmp(char *s1, char *s2)
 {

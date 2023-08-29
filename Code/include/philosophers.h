@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:45:30 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/08/28 16:50:21 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/08/29 19:22:41 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,19 @@ typedef enum e_error
 
 typedef struct s_info
 {
-	int	n_philosophers;
-	int	t_die;
-	int	t_eat;
-	int	t_sleep;
-	int	t_all_eat;
+	int		n_philosophers;
+	int		t_die;
+	int		t_eat;
+	int		t_sleep;
+	int		t_all_eat;
+	struct s_philo	*philos; //como t_philo está declarado abajo, hay que declararlo así // ESTO LO USO PARA LUEGO DECLARAR ASI EL Nº PHILOS
 	//int	t_active;
 }	t_info;
 
 typedef struct s_philo
 {
 	long long		t_start;
-	t_info			*philosophers;
+	t_info			philosophers;
 	// pthread_mutex_t	*forks;
 }	t_philo;
 

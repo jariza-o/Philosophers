@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:08:19 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/08/20 12:17:16 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/08/29 18:50:50 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,12 @@ int	arguments_checker(char **str)
 		n = 0;
 		while (str[i][n])
 		{
-			if (str[i][n] >= '0' && str[i][n] >= '9')
+			if (str[i][n] >= '0' && str[i][n] <= '9')
 				n++;
 			else
 				return (1);
 		}
+		i++;
 	}
 	return (0);
 }
