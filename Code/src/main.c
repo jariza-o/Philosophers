@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:44:29 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/08/29 19:13:34 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/08/30 20:48:27 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,30 +23,29 @@
 // }
 
 
-void	ft_philo(t_philo *philo)
+void	ft_philo(t_philo *philosophers)
 {
-	printf("TEST2\n");
-	philo->t_start = ft_get_time_ms();
-
-	if (philo->philosophers.n_philosophers == 1)
-		one_philosopher(philo);
+	if (philosophers->info.n_philosophers == 1)
+		one_philosopher(philosophers);
 }
 
 int	main(int argc, char **argv)
 {
-	t_philo	*philo;
+	t_philo	*philosophers;
+	t_info	info; // NO COMPILA PORQUE ESTA UNITILIZADA Y NO SI INCIALIZARLA
+	
 
-	philo = (t_philo *)malloc(sizeof(t_philo));
+	philosophers = (t_philo *)malloc(sizeof(t_philo));
+	if (philosophers == NULL)
+		return 0;
 	// ft_init_stuct(philo);
 	if (argc == 2 && !ft_strcmp(argv[1], "--help"))
 		printf("HELP FUNCTION\n");
 		// help(); // CREAR FUNCION HELP
 	else if ((argc == 5 || argc == 6) && !arguments_checker(argv))
 	{
-		ft_argv_to_info(argv, philo);
-		if (philo == NULL)
-			return 0;
-		ft_philo(philo);
+		ft_argv_to_info(argv, info, philosophers);
+		ft_philo(philosophers);
 	}
 	else
 		printf("Error: Incorrect arguments. For help run: philo --help\n");
