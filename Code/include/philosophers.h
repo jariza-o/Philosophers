@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:45:30 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/08/30 20:42:39 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/01 15:46:49 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_info
 
 typedef struct s_philo
 {
-	t_info			info;
+	t_info			*info;
 	pthread_mutex_t	right_fork;
 	pthread_mutex_t	left_fork;
 	int				last_eat;
@@ -51,7 +51,7 @@ typedef struct s_philo
 int			arguments_checker(char **str);
 
 /* Philosophers functions */
-void		ft_argv_to_info(char **argv, t_info info, t_philo *philosophers);
+void		ft_argv_to_info(char **argv, t_info *info, t_philo *philosophers);
 void		one_philosopher(t_philo *philo);
 
 /* TIME */

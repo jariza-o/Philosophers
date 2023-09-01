@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:42:32 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/08/30 20:42:18 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/01 15:48:27 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ void	ft_t_start_to_info(t_philo *philosopher)
 
 	time = ft_get_time_ms();
 	i = 0;
-	while (i < philosopher->info.n_philosophers)
+	while (i < philosopher->info->n_philosophers)
 	{
-		philosopher[i].info.t_start = time;
+		philosopher[i].info->t_start = time;
 		i++;
 	}
 }
 
 long long	ft_get_actual_time(t_philo *philosophers)
 {
-	return (ft_get_time_ms() - philosophers->info.t_start); //así cogería el del primer filosofo aunque como este dato en todos es igual no pasa nada 
+	return (ft_get_time_ms() - philosophers->info->t_start); //así cogería el del primer filosofo aunque como este dato en todos es igual no pasa nada 
 }
