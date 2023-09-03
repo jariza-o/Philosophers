@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:44:29 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/01 15:47:09 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/03 20:33:25 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,16 @@ int	main(int argc, char **argv)
 {
 	t_philo	*philosophers;
 	t_info	info; // NO COMPILA PORQUE ESTA UNITILIZADA Y NO SI INCIALIZARLA
-	
 
-	philosophers = (t_philo *)malloc(sizeof(t_philo) * ft_atoi(argv[1]));
-	if (philosophers == NULL)
-		return 0;
-	// ft_init_stuct(philo);
 	if (argc == 2 && !ft_strcmp(argv[1], "--help"))
-		printf("HELP FUNCTION\n");
-		// help(); // CREAR FUNCION HELP
+		ft_help();
 	else if ((argc == 5 || argc == 6) && !arguments_checker(argv))
 	{
-		ft_argv_to_info(argv, &info, philosophers);
+		philosophers = (t_philo *)malloc(sizeof(t_philo) * ft_atoi(argv[1]));
+		if (philosophers == NULL)
+			return 0; //LE PONGO ERROR
+		ft_init_info(argv, &info, philosophers);
+		ft_init_philosophers(philosophers);
 		ft_philo(philosophers);
 	}
 	else
