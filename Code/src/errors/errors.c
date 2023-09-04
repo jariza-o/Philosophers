@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:08:19 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/08/29 18:50:50 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/04 19:49:45 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,11 @@ int	arguments_checker(char **str)
 		i++;
 	}
 	return (0);
+}
+
+void	ft_errors(int error)
+{
+	if (error == MALLOC_FAIL)
+		printf("Error: Failed to allocated memory.\n");
+	exit (1);
 }

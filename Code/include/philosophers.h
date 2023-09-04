@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:45:30 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/03 20:33:16 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/04 20:09:41 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # define PINK "\033[0;91m"
 # define RED "\033[0;31m"
 # define END "\033[0m" // NO SE SI USAR
+
+# define MALLOC_FAIL	1
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -39,7 +41,7 @@ typedef struct s_info
 	int				t_all_eat;
 	long long		t_start;
 	pthread_mutex_t	*forks; //CREO QUE SE PUEDE QUITAR
-	
+	int				is_dead;
 	// struct s_philo	*philos; //como t_philo está declarado abajo, hay que declararlo así // ESTO LO USO PARA LUEGO DECLARAR ASI EL Nº PHILOS
 	// int	t_active;
 }	t_info;
@@ -60,16 +62,18 @@ void		ft_help(void);
 
 /* Errors */
 int			arguments_checker(char **str);
+void		ft_errors(int error);
 
 /* Philosophers functions */
-void		ft_init_info(char **argv, t_info *info, t_philo *philosophers);
-void		ft_init_philosophers(t_philo *philosophers);
+void		ft_init_info(char **argv, t_info *info);
+void		ft_init_philosophers(t_philo *philosophers, t_info *info);
 void		one_philosopher(t_philo *philo);
+void		ft_threads(t_philo *philosophers);
 
 /* TIME */
 long long	ft_get_time_ms(void);
 long long	ft_get_actual_time(t_philo *philosophers);
-void		ft_t_start_to_info(t_philo *philosopher);
+long long	ft_t_start_to_info(t_philo *philo);
 
 /* Print functions */
 void		ft_print_status(t_philo *philosophers, char *status);

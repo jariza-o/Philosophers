@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:42:32 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/03 18:30:25 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/04 20:09:22 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,7 @@ long long	ft_get_actual_time(t_philo *philosophers)
 	return (ft_get_time_ms() - philosophers->info->t_start); //así cogería el del primer filosofo aunque como este dato en todos es igual no pasa nada 
 }
 
-void	ft_t_start_to_info(t_philo *philosopher)
+long long	ft_t_start_to_info(t_philo *philo)
 {
-	long long	time;
-	int			i;
-
-	time = ft_get_time_ms();
-	i = 0;
-	while (i < philosopher->info->n_philosophers)
-	{
-		philosopher[i].info->t_start = time;
-		i++;
-	}
+	return (ft_get_time_ms() * philo->info->n_philosophers * 20);  //Se añade este tiempo de inicio porque hay que tener en cuenta el tiempo que se tarda en crear los hilos
 }

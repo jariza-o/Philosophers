@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:44:29 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/03 20:33:25 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/04 20:12:57 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,16 @@
 void	ft_philo(t_philo *philosophers)
 {
 	if (philosophers->info->n_philosophers == 1)
+	{
 		one_philosopher(philosophers);
+		// LIBERAR
+	}
+	else
+	{
+		// ft_threads(philosophers);
+		//FUNCION QUE HAGA EL WHILE (1)
+		//LIBERAR
+	}
 }
 
 int	main(int argc, char **argv)
@@ -39,10 +48,10 @@ int	main(int argc, char **argv)
 	else if ((argc == 5 || argc == 6) && !arguments_checker(argv))
 	{
 		philosophers = (t_philo *)malloc(sizeof(t_philo) * ft_atoi(argv[1]));
-		if (philosophers == NULL)
-			return 0; //LE PONGO ERROR
-		ft_init_info(argv, &info, philosophers);
-		ft_init_philosophers(philosophers);
+		if (philosophers == NULL) //preguntar si es lo mismo que if (!philosophers)
+			ft_errors(MALLOC_FAIL);
+		ft_init_info(argv, &info);
+		ft_init_philosophers(philosophers, &info);
 		ft_philo(philosophers);
 	}
 	else
