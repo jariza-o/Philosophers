@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:45:30 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/04 20:09:41 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/05 20:44:47 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,24 @@
 # define RED "\033[0;31m"
 # define END "\033[0m" // NO SE SI USAR
 
+/* ERRORS DEFINES */
 # define MALLOC_FAIL	1
+# define THREAD_FAIL	2
+# define ARGUMENTS_FAIL	3
+# define PHILO_LIMIT	4
+# define MUTEX_FAIL		5
 
 # include <stdlib.h>
 # include <stdio.h>
 # include <pthread.h>
 # include <sys/time.h>
 
-typedef enum e_error
-{
-	ERROR,
-}	t_error;
+/* PARA EL PROXIMO PROYECTO PLANTEAR LOS ERRORES ASI */
+// typedef enum e_error
+// {
+// 	ERROR,
+// 	MALLOC_FAIL,
+// }	t_error;
 
 typedef struct s_info
 {
@@ -42,6 +49,9 @@ typedef struct s_info
 	long long		t_start;
 	pthread_mutex_t	*forks; //CREO QUE SE PUEDE QUITAR
 	int				is_dead;
+	//int				is_eaten; //FUNCION PARA IR SUMANDO +1 cada vez que cada philo haya comido las veces necesarias
+
+
 	// struct s_philo	*philos; //como t_philo está declarado abajo, hay que declararlo así // ESTO LO USO PARA LUEGO DECLARAR ASI EL Nº PHILOS
 	// int	t_active;
 }	t_info;
@@ -50,8 +60,8 @@ typedef struct s_philo
 {
 	t_info			*info;
 	int				id;
-	pthread_mutex_t	right_fork;
-	pthread_mutex_t	left_fork;
+	pthread_mutex_t	*right_fork;
+	pthread_mutex_t	*left_fork;
 	int				last_eat;
 	int				num_eat;
 	pthread_t		philosophers;
@@ -61,7 +71,7 @@ typedef struct s_philo
 void		ft_help(void);
 
 /* Errors */
-int			arguments_checker(char **str);
+void		arguments_checker(char **str);
 void		ft_errors(int error);
 
 /* Philosophers functions */
@@ -69,6 +79,9 @@ void		ft_init_info(char **argv, t_info *info);
 void		ft_init_philosophers(t_philo *philosophers, t_info *info);
 void		one_philosopher(t_philo *philo);
 void		ft_threads(t_philo *philosophers);
+void		*ft_thread_routine(void *arg);
+void		ft_loop(t_philo *philosophers);
+void		ft_is_dead(t_philo *philosophers);
 
 /* TIME */
 long long	ft_get_time_ms(void);

@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 20:00:17 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/03 20:33:47 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/05 20:03:11 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,14 @@ void	banner2(void)
 void	arg_help(void)
 {
 	printf("COMMANDS ARGUMENTS:\n");
-	printf("Example: ./philo 2 500 200 300 8");
+	printf("Example: ./philo 2 500 200 300 8\n");
 	printf("\t - 2: number of philosophers.\n");
 	printf("\t - 500: time to die.\n");
 	printf("\t - 200: time to eat.\n");
 	printf("\t - 300: time to sleep.\n");
 	printf("\t - 8: number of time each philosopher must eat.\n");
+	printf("**Note: the minimum number of philosophers is 1 and the ");
+	printf("maximum number is 200.\n");
 }
 
 void	ft_help(void)

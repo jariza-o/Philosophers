@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:44:29 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/04 20:12:57 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/05 15:57:07 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_philo(t_philo *philosophers)
 	else
 	{
 		// ft_threads(philosophers);
-		//FUNCION QUE HAGA EL WHILE (1)
+		// ft_loop(philosophers); // PASA ALGO SI EJECUTA EL LOOP FUERA DE DONDE CRE
 		//LIBERAR
 	}
 }
@@ -45,8 +45,9 @@ int	main(int argc, char **argv)
 
 	if (argc == 2 && !ft_strcmp(argv[1], "--help"))
 		ft_help();
-	else if ((argc == 5 || argc == 6) && !arguments_checker(argv))
+	else // if ((argc == 5 || argc == 6) && !arguments_checker(argv)) // COMENTADO PORQUE HE CAMBIADO LA FUNCION DE ARG_CHECk
 	{
+		arguments_checker(argv);
 		philosophers = (t_philo *)malloc(sizeof(t_philo) * ft_atoi(argv[1]));
 		if (philosophers == NULL) //preguntar si es lo mismo que if (!philosophers)
 			ft_errors(MALLOC_FAIL);
@@ -54,6 +55,6 @@ int	main(int argc, char **argv)
 		ft_init_philosophers(philosophers, &info);
 		ft_philo(philosophers);
 	}
-	else
-		printf("Error: Incorrect arguments. For help run: philo --help\n");
+	// else // COMENTADO PORQUE HE CAMBIADO LA FUNCION DE ARG_CHECk
+	// 	ft_errors(ARGUMENTS_FAIL);
 }

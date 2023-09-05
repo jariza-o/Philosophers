@@ -1,3 +1,7 @@
 # Philosophers
 
-- Inicializar de nuevo los datos (correfir funcion) y crear tenedores en misma funcion
+- ES BUENO CREAR UNA FUNCION DE USLEEP
+** RECUERDA QUE CON HILOS, CADA FUNCION DE ESTAS SE EJECUTA INDEPENDIENTE
+- PARA EMPEZAR A CREAR LA FUNCION DE COGER TENEDORE, COMER, DORMIR, PENSAR
+- Comprobación de algun muerto y de si todos han comido
+- Funcion para liberar

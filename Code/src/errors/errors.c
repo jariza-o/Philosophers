@@ -6,13 +6,13 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:08:19 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/04 19:49:45 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/05 16:29:11 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philosophers.h"
 
-int	arguments_checker(char **str)
+void	arguments_checker(char **str)
 {
 	int	i;
 	int	n;
@@ -26,16 +26,30 @@ int	arguments_checker(char **str)
 			if (str[i][n] >= '0' && str[i][n] <= '9')
 				n++;
 			else
-				return (1);
+				ft_errors(ARGUMENTS_FAIL);
 		}
 		i++;
 	}
-	return (0);
+	if (i != 5 && i != 6)
+		ft_errors(ARGUMENTS_FAIL);
+	if (ft_atoi(str[1]) < 1 || ft_atoi(str[1]) > 200)
+		ft_errors(PHILO_LIMIT);
 }
 
 void	ft_errors(int error)
 {
 	if (error == MALLOC_FAIL)
 		printf("Error: Failed to allocated memory.\n");
+	else if (error == THREAD_FAIL)
+		printf("Error: Failed creating the threads.\n");
+	else if (error == ARGUMENTS_FAIL)
+		printf("Error: Incorrect arguments. For help run: philo --help\n");
+	else if (error == PHILO_LIMIT)
+	{
+		printf("Error: the minimum number of philosophers is 1 and the ");
+		printf("maximum number is 200.\n");
+	}
+	else if (error == MUTEX_FAIL)
+		printf("Error: Failed to create the mutex\n");
 	exit (1);
 }
