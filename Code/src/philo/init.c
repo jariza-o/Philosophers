@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:57:35 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/05 20:46:45 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/06 16:54:29 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,15 @@ void	ft_init_info(char **argv, t_info *info)
 		i++;
 	}
 	info->is_dead = 0;
-	// INICIALIZAE IS_EATEN, NOSE SI HA ESTA LE VA A INCREMENTAR CADA FILOSOFO, O LO MAS LOGICO YA QUE NO HABLA, QUE UNA FUNCION EXTERNO LO COMPRUEBE Y MODIFIQUE ESTE VALOR
+	info->is_eaten = 0; //NO SE SI PONER -1 CUANDO NO HAYA MAXIMO DE COMIDAS
+	info->mutex_info = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+	if (info->mutex_info == NULL)
+		ft_errors(MALLOC_FAIL);
+	if ((pthread_mutex_init(info->mutex_info, NULL) != 0))
+		{
+			//Liberar memoria de info->forks y de philosophers (memoria reservada en main.c)
+			ft_errors(MUTEX_FAIL);
+		}
 }
 
 void	ft_init_philosophers(t_philo *philosophers, t_info *info)

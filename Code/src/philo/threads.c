@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 13:19:31 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/05 19:33:25 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/06 17:32:13 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,21 @@ void	ft_threads(t_philo *philosophers)
 			ft_errors(THREAD_FAIL);
 		}
 		i++;
+	}
+}
+
+int	ft_stop(t_philo *philosophers)
+{
+	pthread_mutex_lock(philosophers->info->mutex_info);
+	if (philosophers->info->is_dead == 1 || philosophers->info->is_eaten == philosophers->info->n_philosophers)
+	{
+		pthread_mutex_lock(philosophers->info->mutex_info);
+		return (0);
+	}
+	else
+	{
+		pthread_mutex_lock(philosophers->info->mutex_info);
+		return (1);
 	}
 }
 

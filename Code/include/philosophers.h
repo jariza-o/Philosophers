@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:45:30 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/05 20:44:47 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/06 17:32:58 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ typedef struct s_info
 	long long		t_start;
 	pthread_mutex_t	*forks; //CREO QUE SE PUEDE QUITAR
 	int				is_dead;
-	//int				is_eaten; //FUNCION PARA IR SUMANDO +1 cada vez que cada philo haya comido las veces necesarias
-
+	int				is_eaten; //FUNCION PARA IR SUMANDO +1 cada vez que cada philo haya comido las veces necesarias
+	pthread_mutex_t	*mutex_info; //MUTEX CREADO PARA BLOQUEAR LA MESA CUANDO COMPROBAMOS SI HAN COMIDO O SI ALGUNO HA MUERTO
 
 	// struct s_philo	*philos; //como t_philo está declarado abajo, hay que declararlo así // ESTO LO USO PARA LUEGO DECLARAR ASI EL Nº PHILOS
 	// int	t_active;
@@ -81,6 +81,7 @@ void		one_philosopher(t_philo *philo);
 void		ft_threads(t_philo *philosophers);
 void		*ft_thread_routine(void *arg);
 void		ft_loop(t_philo *philosophers);
+int			ft_stop(t_philo *philosophers);
 void		ft_is_dead(t_philo *philosophers);
 
 /* TIME */
