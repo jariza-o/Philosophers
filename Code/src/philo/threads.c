@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 13:19:31 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/06 17:32:13 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/12 03:39:12 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,27 @@ int	ft_stop(t_philo *philosophers)
 	}
 }
 
-void	ft_is_dead(t_philo *philosophers)
+/* Comprueba que el philosofo no está muerto*/
+int	ft_is_dead(t_philo *philosophers)
 {
-	
+	long long	t;
+
+	pthread_mutex_lock(philosophers->info->mutex_info);
+	pthread_mutex_lock(philosophers->mutex_eat); // Se bloquea para que mientras esta consultando nadie lo cambie, y así evitar si debería estar muerto que cambia el last_eat mientras hace la comprobación
+	t = ft_get_actual_time(philosophers) - philosophers->last_eat; // Como la funcion de obtener el tiempo solo hace leer info y siempre va a leer un dato que nadie le escribe, puede realizarlo aunque este bloqueado info con el mutex
+	pthread_mutex_unlock(philosophers->mutex_eat);
+	if (t >= philosophers->info->t_die)
+	{
+		ft_print_status(philosophers, "DIE");
+		philosophers->info->is_dead = 1;
+		pthread_mutex_unlock(philosophers->info->mutex_info);
+		return (0);
+	}
+	else
+	{
+		pthread_mutex_unlock(philosophers->info->mutex_info);
+		return (1);
+	}
 }
 
 void	ft_loop(t_philo *philosophers) // Bucle infinito que comprueba si ha muerto algunos o se ha parado por algo
@@ -62,12 +80,13 @@ void	ft_loop(t_philo *philosophers) // Bucle infinito que comprueba si ha muerto
 		i = 0;
 		while (i < philosophers->info->n_philosophers)
 		{
-			if (!ft_is_dead(&philosopher[i]))
+			if (!ft_is_dead(&philosophers[i]))
 				break ;
 			i++;
 		}
-		// if (FUNCION MUST STOP)
-			// break ;
+		if (!ft_stop(philosophers))
+			break ;
 		usleep (100);
 	}
+	// return ;
 }

@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:16:02 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/06 19:44:28 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/12 03:24:51 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void	ft_eat(t_philo *philosophers)
 {
 	ft_take_forks(philosophers);
 	ft_print_status(philosophers, "EAT");
-	// MUTEXT PHILOSOPHER->MUTEX_EAT PARA APUNTAR EL LAST_EAT
+	pthread_mutex_lock(philosophers->mutex_eat);
 	philosophers->last_eat = ft_get_actual_time(philosophers);
-	// UNLOCK DEL MUTEX
+	pthread_mutex_unlock(philosophers->mutex_eat);
 	philosophers->num_eat++;
 	if (philosophers->num_eat == philosophers->info->t_all_eat)
 	{
@@ -56,11 +56,50 @@ void	ft_eat(t_philo *philosophers)
 	return (NULL);  // ES OBLIGATORIO??
 }
 
+void	ft_sleep(t_philo *philosophers)
+{
+	long long	t; // Porque es lon??
+
+	ft_print_status(philosophers, "SLEEP");
+	t = ft_get_actual_time(philosophers);
+	while (ft_stop(philosophers) && ft_get_actual_time(philosophers) < (t + philosophers->info->t_sleep)) // Mientras siga bien y el tiempo actual sea menos que cuadno empezo + el tiempo que duerme, sigue durmiendo
+		usleep(100);
+	// return (NULL);
+}
+void	ft_think(t_philo *philosophers)
+{
+	long long	t;
+
+	ft_print_status(philosophers, "THINK");
+	t = ft_get_actual_time(philosophers);
+	while (ft_stop(philosophers) && (ft_get_actual_time(philosophers) <  (t + philosophers->info->t_think))) // MIentras todo vaya bien y el tiempo sea menor de el de pensar, piensa
+		usleep(100);
+	// return (NULL);
+}
+
 void	*ft_thread_routine(void *arg)
 {
 	t_philo	*philosophers;
-	
+
 	philosophers = (t_philo *)malloc(sizeof(t_philo));
 	if (philosophers == NULL)
 		ft_errors(MALLOC_FAIL);
+	while (ft_get_actual_time(philosophers) < 0) //Inicializa el dato de ultima vez que come para así si no come la primera vez a tiempo se pueda morir
+	{
+		pthread_mutex_lock(philosophers->mutex_eat);
+		philosophers->last_eat = ft_get_actual_time(philosophers);
+		pthread_mutex_unlock(philosophers->mutex_eat);
+	}
+	if (philosophers->id % 2 == 0)
+		usleep(50); // PORQUE ESPERA 50ms??
+	while (ft_stop(philosophers)) // Mientras siga vivo o no haya comido todas las veces, en infinito pruea a comer, dormir  y pensar, en ese orden ya que es como lo hacen
+	{
+		if (ft_stop(philosophers))
+			ft_eat(philosophers);
+		if (ft_stop(philosophers))
+			ft_sleep(philosophers);
+		if (ft_stop(philosophers))
+			ft_think(philosophers);
+	}
+	// return (NULL);
 }

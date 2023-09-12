@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:44:29 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/05 15:57:07 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/12 04:24:56 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,11 @@
 void	ft_philo(t_philo *philosophers)
 {
 	if (philosophers->info->n_philosophers == 1)
-	{
 		one_philosopher(philosophers);
-		// LIBERAR
-	}
 	else
 	{
-		// ft_threads(philosophers);
-		// ft_loop(philosophers); // PASA ALGO SI EJECUTA EL LOOP FUERA DE DONDE CRE
-		//LIBERAR
+		ft_threads(philosophers);
+		ft_loop(philosophers); // PASA ALGO SI EJECUTA EL LOOP FUERA DE DONDE CRE
 	}
 }
 
@@ -54,6 +50,7 @@ int	main(int argc, char **argv)
 		ft_init_info(argv, &info);
 		ft_init_philosophers(philosophers, &info);
 		ft_philo(philosophers);
+		ft_free(philosophers, &info); //lo podría hacer sin pasarle info ya que esta en philosophers la dirección de info
 	}
 	// else // COMENTADO PORQUE HE CAMBIADO LA FUNCION DE ARG_CHECk
 	// 	ft_errors(ARGUMENTS_FAIL);

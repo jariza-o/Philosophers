@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:57:35 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/06 16:54:29 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/12 03:30:23 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ft_init_info(char **argv, t_info *info)
 	info->t_die = ft_atoi(argv[2]);
 	info->t_eat = ft_atoi(argv[3]);
 	info->t_sleep = ft_atoi(argv[4]);
+	info->t_think = (info->t_die - (info->t_eat + info->t_sleep)) / 2; // PORQUE ES ASI??
 	info->t_start = 0;
 	if (argv[5])
 		info->t_all_eat = ft_atoi(argv[5]);
@@ -44,7 +45,7 @@ void	ft_init_info(char **argv, t_info *info)
 	info->mutex_info = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
 	if (info->mutex_info == NULL)
 		ft_errors(MALLOC_FAIL);
-	if ((pthread_mutex_init(info->mutex_info, NULL) != 0))
+	if (pthread_mutex_init(info->mutex_info, NULL) != 0)
 		{
 			//Liberar memoria de info->forks y de philosophers (memoria reservada en main.c)
 			ft_errors(MUTEX_FAIL);
@@ -61,6 +62,11 @@ void	ft_init_philosophers(t_philo *philosophers, t_info *info)
 		philosophers[i].id = i + 1;
 		philosophers[i].info = info; //Le paso la dirección de la tabla info y todos tienen lo mismo
 		philosophers[i].last_eat = 0;
+		philosophers[i].mutex_eat = (pthread_mutex_t *)malloc(sizeof(phtread_mutex_t));
+		if (philosophers[i].mutex_eat == NULL)
+			ft_errors(MALLOC_FAIL);
+		if (pthread_mutex_init(philosophers[i].mutex_eat, NULL) != 0)
+			ft_errors(MUTEX_FAIL);
 		if (info->t_all_eat == -1)
 			philosophers[i].num_eat = -1;
 		else
