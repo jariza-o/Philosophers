@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:08:19 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/05 16:29:11 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/12 04:30:02 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,5 @@ void	ft_errors(int error)
 	}
 	else if (error == MUTEX_FAIL)
 		printf("Error: Failed to create the mutex\n");
-	exit (1);
+	exit (1); // SE PUEDE USAR EXIT?? CREO QUE NO
 }
