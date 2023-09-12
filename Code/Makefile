@@ -6,20 +6,20 @@
 #    By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/17 15:44:12 by jariza-o          #+#    #+#              #
-#    Updated: 2023/09/12 04:26:04 by jariza-o         ###   ########.fr        #
+#    Updated: 2023/09/12 20:41:43 by jariza-o         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Flags
 # ‐fsanitize=thread -g #-g: debuguear no entregar al final
-CFLAGS =	-Wall -Werror -Wextra
+CFLAGS =	-Wall -Werror -Wextra -g
 
 # Philosophers
 NAME =		philo
 SRC =		src/main.c \
 			src/errors/errors.c \
-			src/philo/init.c src/philo/single_routine.c src/philo/rutine.c src/philo/threads.c \
-			src/utils/utils.c src/utils/time.c src/utils/prints.c src/utils/help.c src/utils/free. \
+			src/philoc/init.c src/philoc/single_routine.c src/philoc/rutine.c src/philoc/threads.c \
+			src/utils/utils.c src/utils/time.c src/utils/prints.c src/utils/help.c src/utils/free.c \
 
 OBJT =		$(SRC:.c=.o)
 

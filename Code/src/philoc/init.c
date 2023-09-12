@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:57:35 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/12 03:30:23 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/12 20:28:00 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_init_info(char **argv, t_info *info)
 	int	i;
 
 	info->n_philosophers = ft_atoi(argv[1]);
+	if (info->n_philosophers < 1 || info->n_philosophers > 200)
+		ft_errors(PHILO_LIMIT);
 	info->t_die = ft_atoi(argv[2]);
 	info->t_eat = ft_atoi(argv[3]);
 	info->t_sleep = ft_atoi(argv[4]);
@@ -30,7 +32,14 @@ void	ft_init_info(char **argv, t_info *info)
 	if (info->forks == NULL)
 		ft_errors(MALLOC_FAIL);
 	i = 0;
-	// CREAR UN MUTEX DE LA MESA PARA CUANDO HAYA QUE BLOQUEARLA
+	info->mutex_info = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+	if (info->mutex_info == NULL)
+		ft_errors(MALLOC_FAIL);
+	if ((pthread_mutex_init(info->mutex_info, NULL) != 0))
+	{
+		//Liberar memoria de info->forks y de philosophers (memoria reservada en main.c)
+		ft_errors(MUTEX_FAIL);
+	}
 	while (i < info->n_philosophers - 1)
 	{
 		if ((pthread_mutex_init(&info->forks[i], NULL) != 0))
@@ -62,7 +71,7 @@ void	ft_init_philosophers(t_philo *philosophers, t_info *info)
 		philosophers[i].id = i + 1;
 		philosophers[i].info = info; //Le paso la dirección de la tabla info y todos tienen lo mismo
 		philosophers[i].last_eat = 0;
-		philosophers[i].mutex_eat = (pthread_mutex_t *)malloc(sizeof(phtread_mutex_t));
+		philosophers[i].mutex_eat = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
 		if (philosophers[i].mutex_eat == NULL)
 			ft_errors(MALLOC_FAIL);
 		if (pthread_mutex_init(philosophers[i].mutex_eat, NULL) != 0)

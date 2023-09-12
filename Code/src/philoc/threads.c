@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 13:19:31 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/12 03:39:12 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/12 20:33:07 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_threads(t_philo *philosophers)
 		ft_errors(MALLOC_FAIL);
 	i = 0;
 	philosophers->info->t_start = ft_t_start_to_info(philosophers);
-	while (i < philosophers->info->n_philosophers - 1)
+	while (i < philosophers->info->n_philosophers)
 	{
 		if ((pthread_create(&person[i], NULL, &ft_thread_routine, &philosophers[i])) != 0) //Pasa la funcion ft_threads_routine, para que mientras se ejecuta el bucle infinito, en los demas hilos se ejecute esto simultaneamente
 		{
@@ -38,12 +38,12 @@ int	ft_stop(t_philo *philosophers)
 	pthread_mutex_lock(philosophers->info->mutex_info);
 	if (philosophers->info->is_dead == 1 || philosophers->info->is_eaten == philosophers->info->n_philosophers)
 	{
-		pthread_mutex_lock(philosophers->info->mutex_info);
+		pthread_mutex_unlock(philosophers->info->mutex_info);
 		return (0);
 	}
 	else
 	{
-		pthread_mutex_lock(philosophers->info->mutex_info);
+		pthread_mutex_unlock(philosophers->info->mutex_info);
 		return (1);
 	}
 }

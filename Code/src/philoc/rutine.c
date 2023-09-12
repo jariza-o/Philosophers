@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:16:02 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/12 03:24:51 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/12 19:46:56 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ void	ft_eat(t_philo *philosophers)
 		philosophers->info->is_eaten++;
 		pthread_mutex_unlock(philosophers->info->mutex_info);
 	}
-	while (ft_stop(philo->table) && (ft_current_time(philo->table) < philo->last_eat + philo->table->time_to_eat))
+	while (ft_stop(philosophers) && (ft_get_actual_time(philosophers) < philosophers->last_eat + philosophers->info->t_eat))
 		usleep(100); // Mientras pueda seguir comiendo (no ha muerto nadie o faltan por comer) y mientras no haya terminado de comer
 	pthread_mutex_unlock(philosophers->left_fork);
 	pthread_mutex_unlock(philosophers->right_fork);
-	return (NULL);  // ES OBLIGATORIO??
+	// return (NULL);  // ES OBLIGATORIO??
 }
 
 void	ft_sleep(t_philo *philosophers)
@@ -81,14 +81,15 @@ void	*ft_thread_routine(void *arg)
 {
 	t_philo	*philosophers;
 
-	philosophers = (t_philo *)malloc(sizeof(t_philo));
-	if (philosophers == NULL)
-		ft_errors(MALLOC_FAIL);
+	philosophers = (t_philo *)arg;
+	if (philosophers->info->t_die == 0)
+		return (NULL);
 	while (ft_get_actual_time(philosophers) < 0) //Inicializa el dato de ultima vez que come para así si no come la primera vez a tiempo se pueda morir
 	{
 		pthread_mutex_lock(philosophers->mutex_eat);
 		philosophers->last_eat = ft_get_actual_time(philosophers);
 		pthread_mutex_unlock(philosophers->mutex_eat);
+		usleep(20);
 	}
 	if (philosophers->id % 2 == 0)
 		usleep(50); // PORQUE ESPERA 50ms??
@@ -101,5 +102,5 @@ void	*ft_thread_routine(void *arg)
 		if (ft_stop(philosophers))
 			ft_think(philosophers);
 	}
-	// return (NULL);
+	return (NULL);
 }

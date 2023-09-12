@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:45:30 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/12 04:21:06 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/12 18:56:31 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define PHILO_LIMIT	4
 # define MUTEX_FAIL		5
 
+# include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <pthread.h>
@@ -109,5 +110,6 @@ void		ft_print_status(t_philo *philosophers, char *status);
 int			ft_strcmp(char *s1, char *s2);
 int			ft_atoi(const char *str);
 void		ft_print_actual_time(t_philo *philosophers);
+void		ft_printf_info(t_philo *philosophers);
 
 #endif
