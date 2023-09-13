@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:57:35 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/13 16:21:40 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/13 19:45:32 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_init_info(char **argv, t_info *info)
 	{
 		//Liberar memoria de info->forks y de philosophers (memoria reservada en main.c)
 		ft_errors(MUTEX_FAIL);
-	}
+	}	
 	while (i < info->n_philosophers)
 	{
 		if ((pthread_mutex_init(&info->forks[i], NULL) != 0))

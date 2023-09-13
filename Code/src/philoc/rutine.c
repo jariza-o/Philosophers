@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:16:02 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/13 18:08:43 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/13 19:36:00 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,16 +110,10 @@ void	*ft_thread_routine(void *arg)
 		usleep(50); // PORQUE ESPERA 50ms??
 	while (ft_stop(philosophers)) // Mientras siga vivo o no haya comido todas las veces, en infinito pruea a comer, dormir  y pensar, en ese orden ya que es como lo hacen
 	{
-		if (!ft_stop(philosophers))
-			return (NULL);
 		if (ft_stop(philosophers))
 			ft_eat(philosophers);
-		if (!ft_stop(philosophers))
-			return (NULL);
 		if (ft_stop(philosophers))
 			ft_sleep(philosophers);
-		if (!ft_stop(philosophers))
-			return (NULL);
 		if (ft_stop(philosophers))
 			ft_think(philosophers);
 	}
