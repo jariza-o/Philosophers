@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:16:02 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/12 19:46:56 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/13 18:08:43 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,36 @@
 /* Separa entre philosofos pares e impares, para coger el tenedor que no es suyo (CREO QU ES ASI) */
 void	ft_take_forks(t_philo *philosophers)
 {
-	if (philosophers->id % 2 == 0)
-	{
+	// if (philosophers->id % 2 == 0)
+	// {
+		 
 		pthread_mutex_lock(philosophers->right_fork);
+		if (!ft_stop(philosophers))
+			return ;
 		ft_print_status(philosophers, "FORK");
 		if (!ft_stop(philosophers))
 			return ;
 		pthread_mutex_lock(philosophers->left_fork);
-		ft_print_status(philosophers, "FORK");
-	}
-	else
-	{
-		pthread_mutex_lock(philosophers->left_fork);
-		ft_print_status(philosophers, "FORK");
 		if (!ft_stop(philosophers))
 			return ;
-		pthread_mutex_lock(philosophers->right_fork);
 		ft_print_status(philosophers, "FORK");
-	}
+	// }
+	// else
+	// {
+	// 	pthread_mutex_lock(philosophers->left_fork);
+	// 	ft_print_status(philosophers, "FORK");
+	// 	if (!ft_stop(philosophers))
+	// 		return ;
+	// 	pthread_mutex_lock(philosophers->right_fork);
+	// 	ft_print_status(philosophers, "FORK");
+	// }
 }
 /* El philosofo coge los Tenedores, apunta cuando empieza a comer, si ha terminado de comer todas las veces que necesita pone que ha terminado, espera a que termine de comer (o si ha ocurrido algo) y suelta los tenedores */
 void	ft_eat(t_philo *philosophers)
 {
 	ft_take_forks(philosophers);
+	if (!ft_stop(philosophers))
+		return ;
 	ft_print_status(philosophers, "EAT");
 	pthread_mutex_lock(philosophers->mutex_eat);
 	philosophers->last_eat = ft_get_actual_time(philosophers);
@@ -61,6 +68,8 @@ void	ft_sleep(t_philo *philosophers)
 	long long	t; // Porque es lon??
 
 	ft_print_status(philosophers, "SLEEP");
+	if (!ft_stop(philosophers))
+		return ;
 	t = ft_get_actual_time(philosophers);
 	while (ft_stop(philosophers) && ft_get_actual_time(philosophers) < (t + philosophers->info->t_sleep)) // Mientras siga bien y el tiempo actual sea menos que cuadno empezo + el tiempo que duerme, sigue durmiendo
 		usleep(100);
@@ -70,6 +79,8 @@ void	ft_think(t_philo *philosophers)
 {
 	long long	t;
 
+	if (!ft_stop(philosophers))
+		return ;
 	ft_print_status(philosophers, "THINK");
 	t = ft_get_actual_time(philosophers);
 	while (ft_stop(philosophers) && (ft_get_actual_time(philosophers) <  (t + philosophers->info->t_think))) // MIentras todo vaya bien y el tiempo sea menor de el de pensar, piensa
@@ -84,8 +95,12 @@ void	*ft_thread_routine(void *arg)
 	philosophers = (t_philo *)arg;
 	if (philosophers->info->t_die == 0)
 		return (NULL);
+	// ft_print_actual_time(philosophers);
 	while (ft_get_actual_time(philosophers) < 0) //Inicializa el dato de ultima vez que come para así si no come la primera vez a tiempo se pueda morir
 	{
+		// printf("SYSTEM: %lld\n", ft_get_time_ms());
+		// printf("T_START: %lld\n", philosophers->info->t_start);
+		// printf("res: %lld\n", ft_get_actual_time(philosophers));
 		pthread_mutex_lock(philosophers->mutex_eat);
 		philosophers->last_eat = ft_get_actual_time(philosophers);
 		pthread_mutex_unlock(philosophers->mutex_eat);
@@ -95,10 +110,16 @@ void	*ft_thread_routine(void *arg)
 		usleep(50); // PORQUE ESPERA 50ms??
 	while (ft_stop(philosophers)) // Mientras siga vivo o no haya comido todas las veces, en infinito pruea a comer, dormir  y pensar, en ese orden ya que es como lo hacen
 	{
+		if (!ft_stop(philosophers))
+			return (NULL);
 		if (ft_stop(philosophers))
 			ft_eat(philosophers);
+		if (!ft_stop(philosophers))
+			return (NULL);
 		if (ft_stop(philosophers))
 			ft_sleep(philosophers);
+		if (!ft_stop(philosophers))
+			return (NULL);
 		if (ft_stop(philosophers))
 			ft_think(philosophers);
 	}

@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:57:35 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/12 20:28:00 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/13 16:21:40 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_init_info(char **argv, t_info *info)
 		//Liberar memoria de info->forks y de philosophers (memoria reservada en main.c)
 		ft_errors(MUTEX_FAIL);
 	}
-	while (i < info->n_philosophers - 1)
+	while (i < info->n_philosophers)
 	{
 		if ((pthread_mutex_init(&info->forks[i], NULL) != 0))
 		{
@@ -85,11 +85,15 @@ void	ft_init_philosophers(t_philo *philosophers, t_info *info)
 		{
 			philosophers[i].left_fork = &philosophers[i].info->forks[i];
 			philosophers[i].right_fork = &philosophers[i].info->forks[0];
+			// printf("philosophers[%i].left_fork: %p --> philosophers[%i].info->forks[%i]: %p\n", i, &philosophers[i].left_fork, i, i, &philosophers[i].info->forks[i]);
+			// printf("philosophers[%i].right_fork: %p --> philosophers[%i].info->forks[0]: %p\n", i, &philosophers[i].right_fork, i, &philosophers[i].info->forks[0]);
 		}
 		else
 		{
 			philosophers[i].left_fork = &philosophers[i].info->forks[i];
 			philosophers[i].right_fork = &philosophers[i].info->forks[i + 1];
+			// printf("philosophers[%i].left_fork: %p --> philosophers[%i].info->forks[%i]: %p\n", i, &philosophers[i].left_fork, i, i, &philosophers[i].info->forks[i]);
+			// printf("philosophers[%i].right_fork: %p --> philosophers[%i].info->forks[%i]: %p\n", i, &philosophers[i].right_fork, i, i + 1, &philosophers[i].info->forks[i + 1]);
 		}
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:44:29 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/12 20:21:29 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/13 16:22:19 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_philo(t_philo *philosophers)
 	else
 	{
 		ft_threads(philosophers);
-		ft_loop(philosophers); // PASA ALGO SI EJECUTA EL LOOP FUERA DE DONDE CRE
+		ft_loop(philosophers);
 	}
 }
 

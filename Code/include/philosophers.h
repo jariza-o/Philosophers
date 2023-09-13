@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:45:30 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/12 18:56:31 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/13 17:47:46 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define PINK "\033[0;91m"
 # define RED "\033[0;31m"
 # define END "\033[0m" // NO SE SI USAR
+# define PRINT "\033[38;5;154m"
 
 /* ERRORS DEFINES */
 # define MALLOC_FAIL	1
