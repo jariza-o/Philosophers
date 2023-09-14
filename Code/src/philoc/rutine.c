@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rutine.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manujime <manujime@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:16:02 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/14 19:36:20 by manujime         ###   ########.fr       */
+/*   Updated: 2023/09/14 20:51:02 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ft_take_forks(t_philo *philosophers)
 void	ft_eat(t_philo *philosophers)
 {
 	if (!ft_stop(philosophers))
-			return ;
+		return ;
 	ft_take_forks(philosophers);
 	ft_print_status(philosophers, "EAT");
 	pthread_mutex_lock(philosophers->mutex_eat);

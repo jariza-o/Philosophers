@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manujime <manujime@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 03:40:41 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/14 19:34:49 by manujime         ###   ########.fr       */
+/*   Updated: 2023/09/14 21:08:11 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_free(t_philo *philosophers, t_info *info)
 	i = 0;
 	while (i < info->n_philosophers)
 	{
-		pthread_join(philosophers[i].philosophers, NULL);
+		//pthread_join(philosophers[i].philosophers, NULL);
 		pthread_join(philosophers->person[i], NULL);
 		pthread_mutex_destroy(philosophers[i].mutex_eat);
 //		pthread_mutex_destroy(&philosophers->person[i]);

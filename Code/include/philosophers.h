@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manujime <manujime@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:45:30 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/14 19:33:15 by manujime         ###   ########.fr       */
+/*   Updated: 2023/09/14 21:19:45 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct s_philo
 	pthread_mutex_t	*mutex_eat;
 	int				last_eat;
 	int				num_eat;
-	pthread_t		philosophers;
+	//pthread_t		philosophers;
 	pthread_t		*person;
 }	t_philo;
 
@@ -76,7 +76,7 @@ void		ft_init_info(char **argv, t_info *info);
 void		ft_init_philosophers(t_philo *philosophers, t_info *info);
 
 /* Rutine Functions */
-void		one_philosopher(t_philo *philo);
+void		one_philosopher(char **argv);
 void		ft_threads(t_philo *philosophers);
 void		*ft_thread_routine(void *arg);
 void		ft_loop(t_philo *philosophers);
