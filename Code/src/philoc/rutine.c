@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:16:02 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/13 20:22:09 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/14 17:20:36 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,51 @@
 
 void	ft_take_forks(t_philo *philosophers)
 {
-	pthread_mutex_lock(philosophers->right_fork);
 	if (!ft_stop(philosophers))
 		return ;
-	ft_print_status(philosophers, "FORK");
-	if (!ft_stop(philosophers))
-		return ;
-	pthread_mutex_lock(philosophers->left_fork);
-	if (!ft_stop(philosophers))
-		return ;
-	ft_print_status(philosophers, "FORK");
+	if (philosophers->id % 2 == 0)
+	{
+		if (!ft_stop(philosophers))
+			return ;
+		pthread_mutex_lock(philosophers->right_fork);
+		ft_print_status(philosophers, "FORK");
+		if (!ft_stop(philosophers))
+			return ;
+		pthread_mutex_lock(philosophers->left_fork);
+		ft_print_status(philosophers, "FORK");
+	}
+	else
+	{
+		if (!ft_stop(philosophers))
+			return ;
+		pthread_mutex_lock(philosophers->left_fork);
+		ft_print_status(philosophers, "FORK");
+		if (!ft_stop(philosophers))
+			return ;
+		pthread_mutex_lock(philosophers->right_fork);
+		ft_print_status(philosophers, "FORK");
+	}
 }
+
+// void	ft_take_forks(t_philo *philosophers)
+// {
+// 	pthread_mutex_lock(philosophers->right_fork);
+// 	if (!ft_stop(philosophers))
+// 		return ;
+// 	ft_print_status(philosophers, "FORK");
+// 	if (!ft_stop(philosophers))
+// 		return ;
+// 	pthread_mutex_lock(philosophers->left_fork);
+// 	if (!ft_stop(philosophers))
+// 		return ;
+// 	ft_print_status(philosophers, "FORK");
+// }
 
 void	ft_eat(t_philo *philosophers)
 {
-	ft_take_forks(philosophers);
 	if (!ft_stop(philosophers))
-		return ;
+			return ;
+	ft_take_forks(philosophers);
 	ft_print_status(philosophers, "EAT");
 	pthread_mutex_lock(philosophers->mutex_eat);
 	philosophers->last_eat = ft_get_actual_time(philosophers);
@@ -42,23 +70,26 @@ void	ft_eat(t_philo *philosophers)
 		philosophers->info->is_eaten++;
 		pthread_mutex_unlock(philosophers->info->mutex_info);
 	}
-	while (ft_stop(philosophers) && (ft_get_actual_time(philosophers) < philosophers->last_eat + philosophers->info->t_eat))
-		usleep(100);
+	while (ft_stop(philosophers) && (ft_get_actual_time(philosophers) \
+	< philosophers->last_eat + philosophers->info->t_eat))
+		usleep(50);
 	pthread_mutex_unlock(philosophers->left_fork);
 	pthread_mutex_unlock(philosophers->right_fork);
 }
 
 void	ft_sleep(t_philo *philosophers)
 {
-	long long	t; // Porque es lon??
+	long long	t;
 
-	ft_print_status(philosophers, "SLEEP");
 	if (!ft_stop(philosophers))
 		return ;
+	ft_print_status(philosophers, "SLEEP");
 	t = ft_get_actual_time(philosophers);
-	while (ft_stop(philosophers) && ft_get_actual_time(philosophers) < (t + philosophers->info->t_sleep))
-		usleep(100);
+	while (ft_stop(philosophers) && ft_get_actual_time(philosophers) \
+	< (t + philosophers->info->t_sleep))
+		usleep(50);
 }
+
 void	ft_think(t_philo *philosophers)
 {
 	long long	t;
@@ -67,7 +98,8 @@ void	ft_think(t_philo *philosophers)
 		return ;
 	ft_print_status(philosophers, "THINK");
 	t = ft_get_actual_time(philosophers);
-	while (ft_stop(philosophers) && (ft_get_actual_time(philosophers) <  (t + philosophers->info->t_think)))
+	while (ft_stop(philosophers) && (ft_get_actual_time(philosophers) \
+	< (t + philosophers->info->t_think)))
 		usleep(100);
 }
 

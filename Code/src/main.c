@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:44:29 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/13 20:19:28 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/14 17:22:05 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	main(int argc, char **argv)
 			ft_errors(MALLOC_FAIL);
 		ft_init_philosophers(philosophers, &info);
 		ft_philo(philosophers);
+		usleep(1000);
 		ft_free(philosophers, &info);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 13:19:31 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/13 20:23:22 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/14 17:12:14 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,17 @@ void	ft_threads(t_philo *philosophers)
 	int			i;
 	pthread_t	*person;
 
-	person = (pthread_t *)malloc(sizeof(pthread_t) * philosophers->info->n_philosophers);
+	person = (pthread_t *)malloc(sizeof(pthread_t) \
+	* philosophers->info->n_philosophers);
 	if (person == NULL)
 		ft_errors(MALLOC_FAIL);
 	i = 0;
-	philosophers->info->t_start = ft_get_actual_time(philosophers) + philosophers->info->n_philosophers * 20;
+	philosophers->info->t_start = ft_get_actual_time(philosophers) \
+	+ philosophers->info->n_philosophers * 20;
 	while (i < philosophers->info->n_philosophers)
 	{
-		if ((pthread_create(&person[i], NULL, ft_thread_routine, &philosophers[i])) != 0)
+		if ((pthread_create(&person[i], NULL, ft_thread_routine, \
+		&philosophers[i])) != 0)
 			ft_errors(THREAD_FAIL);
 		i++;
 	}
@@ -33,7 +36,9 @@ void	ft_threads(t_philo *philosophers)
 int	ft_stop(t_philo *philosophers)
 {
 	pthread_mutex_lock(philosophers->info->mutex_info);
-	if (philosophers->info->is_dead == 1 || philosophers->info->is_eaten == philosophers->info->n_philosophers)
+	printf("%s IS DEAD: %d%s\n", PRINT, philosophers->info->is_dead, END);
+	if (philosophers->info->is_dead == 1 || philosophers->info->is_eaten \
+	== philosophers->info->n_philosophers)
 	{
 		pthread_mutex_unlock(philosophers->info->mutex_info);
 		return (0);

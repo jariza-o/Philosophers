@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:45:30 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/13 20:52:26 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/14 15:44:06 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,6 @@
 # include <pthread.h>
 # include <sys/time.h>
 
-/* PARA EL PROXIMO PROYECTO PLANTEAR LOS ERRORES ASI */
-// typedef enum e_error
-// {
-// 	ERROR,
-// 	MALLOC_FAIL,
-// }	t_error;
-
 typedef struct s_info
 {
 	int				n_philosophers;
@@ -50,10 +43,11 @@ typedef struct s_info
 	int				t_think;
 	int				t_all_eat;
 	long long		t_start;
-	pthread_mutex_t	*forks; //CREO QUE SE PUEDE QUITAR
+	pthread_mutex_t	*forks;
 	int				is_dead;
-	int				is_eaten; //FUNCION PARA IR SUMANDO +1 cada vez que cada philo haya comido las veces necesarias
-	pthread_mutex_t	*mutex_info; //MUTEX CREADO PARA BLOQUEAR LA MESA CUANDO COMPROBAMOS SI HAN COMIDO O SI ALGUNO HA MUERTO
+	int				is_eaten;
+	pthread_mutex_t	*mutex_info;
+	pthread_mutex_t	*mutex_print;
 }	t_info;
 
 typedef struct s_philo
