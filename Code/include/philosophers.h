@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: manujime <manujime@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:45:30 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/14 15:44:06 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/14 19:33:15 by manujime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_philo
 	int				last_eat;
 	int				num_eat;
 	pthread_t		philosophers;
+	pthread_t		*person;
 }	t_philo;
 
 /* HELP */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rutine.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: manujime <manujime@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:16:02 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/14 17:20:36 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/14 19:36:20 by manujime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,5 +128,6 @@ void	*ft_thread_routine(void *arg)
 		if (ft_stop(philosophers))
 			ft_think(philosophers);
 	}
+	//printf("%sIS CLOSEDDDDDDDD: %d%s\n", END, philosophers->id, END);
 	return (NULL);
 }

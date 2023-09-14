@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   threads.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: manujime <manujime@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 13:19:31 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/14 17:12:14 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/14 19:36:18 by manujime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,13 @@ void	ft_threads(t_philo *philosophers)
 			ft_errors(THREAD_FAIL);
 		i++;
 	}
+	philosophers->person = person;
 }
 
 int	ft_stop(t_philo *philosophers)
 {
 	pthread_mutex_lock(philosophers->info->mutex_info);
-	printf("%s IS DEAD: %d%s\n", PRINT, philosophers->info->is_dead, END);
+	//printf("%s IS DEAD: %d%s\n", PRINT, philosophers->info->is_dead, END);
 	if (philosophers->info->is_dead == 1 || philosophers->info->is_eaten \
 	== philosophers->info->n_philosophers)
 	{
