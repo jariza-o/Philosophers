@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:45:30 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/14 21:19:45 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/15 11:29:25 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define PURPLE "\033[0;95m"
 # define PINK "\033[0;91m"
 # define RED "\033[0;31m"
-# define END "\033[0m" // NO SE SI USAR
+# define END "\033[0m"
 # define PRINT "\033[38;5;154m"
 
 /* ERRORS DEFINES */
@@ -59,7 +59,6 @@ typedef struct s_philo
 	pthread_mutex_t	*mutex_eat;
 	int				last_eat;
 	int				num_eat;
-	//pthread_t		philosophers;
 	pthread_t		*person;
 }	t_philo;
 
