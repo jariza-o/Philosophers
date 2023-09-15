@@ -6,14 +6,13 @@
 #    By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/17 15:44:12 by jariza-o          #+#    #+#              #
-#    Updated: 2023/09/14 21:27:41 by jariza-o         ###   ########.fr        #
+#    Updated: 2023/09/15 11:22:24 by jariza-o         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Flags
 # ‐fsanitize=thread -g #-g: debuguear no entregar al final
-CFLAGS =	-Wall -Werror -Wextra -pthread 
-#-fsanitize=thread -g
+CFLAGS =	-Wall -Werror -Wextra -pthread -fsanitize=thread -g
 
 # Philosophers
 NAME =		philo
