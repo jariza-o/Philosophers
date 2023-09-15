@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 13:19:31 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/14 21:00:55 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/15 11:28:43 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	ft_threads(t_philo *philosophers)
 int	ft_stop(t_philo *philosophers)
 {
 	pthread_mutex_lock(philosophers->info->mutex_info);
-	//printf("%s IS DEAD: %d%s\n", PRINT, philosophers->info->is_dead, END);
 	if (philosophers->info->is_dead == 1 || philosophers->info->is_eaten \
 	== philosophers->info->n_philosophers)
 	{

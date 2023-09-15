@@ -6,13 +6,13 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:57:35 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/14 15:45:19 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/15 11:29:07 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philosophers.h"
 
-void	ft_init_inf_mutex(t_info *info) //CAMBIADO
+void	ft_init_inf_mutex(t_info *info)
 {
 	int	i;
 
@@ -58,7 +58,7 @@ void	ft_init_info(char **argv, t_info *info)
 	ft_init_inf_mutex(info);
 }
 
-void	ft_init_philo_mutex(t_philo *philo) //CAMBIADO
+void	ft_init_philo_mutex(t_philo *philo)
 {
 	philo->mutex_eat = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
 	if (philo->mutex_eat == NULL)

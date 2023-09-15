@@ -6,7 +6,7 @@
 /*   By: jariza-o <jariza-o@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:16:02 by jariza-o          #+#    #+#             */
-/*   Updated: 2023/09/14 20:51:02 by jariza-o         ###   ########.fr       */
+/*   Updated: 2023/09/15 11:28:57 by jariza-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,13 @@ void	ft_take_forks(t_philo *philosophers)
 	}
 }
 
-// void	ft_take_forks(t_philo *philosophers)
-// {
-// 	pthread_mutex_lock(philosophers->right_fork);
-// 	if (!ft_stop(philosophers))
-// 		return ;
-// 	ft_print_status(philosophers, "FORK");
-// 	if (!ft_stop(philosophers))
-// 		return ;
-// 	pthread_mutex_lock(philosophers->left_fork);
-// 	if (!ft_stop(philosophers))
-// 		return ;
-// 	ft_print_status(philosophers, "FORK");
-// }
-
 void	ft_eat(t_philo *philosophers)
 {
 	if (!ft_stop(philosophers))
 		return ;
 	ft_take_forks(philosophers);
+	if (!ft_stop(philosophers))
+		return ;
 	ft_print_status(philosophers, "EAT");
 	pthread_mutex_lock(philosophers->mutex_eat);
 	philosophers->last_eat = ft_get_actual_time(philosophers);
