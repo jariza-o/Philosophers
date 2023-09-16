@@ -101,6 +101,7 @@ void		ft_print_status(t_philo *philosophers, char *status);
 /* Utils */
 int			ft_strcmp(char *s1, char *s2);
 int			ft_atoi(const char *str);
+long int	ft_atol(const char *str);
 void		ft_print_actual_time(t_philo *philosophers);
 
 #endif

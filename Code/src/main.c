@@ -12,10 +12,10 @@
 
 #include "../include/philosophers.h"
 
-static void ft_leaks()
-{
-	system("leaks -q philo");
-}
+// static void ft_leaks()
+// {
+// 	system("leaks -q philo");
+// }
 
 void	ft_philo(t_philo *philosophers, t_info *info)
 {
@@ -27,7 +27,7 @@ void	ft_philo(t_philo *philosophers, t_info *info)
 
 int	main(int argc, char **argv)
 {
-	atexit(ft_leaks);
+	// atexit(ft_leaks);
 	t_philo	*philosophers;
 	t_info	info;
 

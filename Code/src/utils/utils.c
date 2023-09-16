@@ -47,3 +47,29 @@ int	ft_atoi(const char *str)
 	}
 	return (signo * buffer);
 }
+
+long int	ft_atol(const char *str)
+{
+	int			count;
+	int			signo;
+	long int	buffer;
+
+	count = 0;
+	signo = 1;
+	buffer = 0;
+	while ((str[count] >= '\t' && str[count] <= '\r')
+		|| str[count] == 32)
+		count++;
+	if (str[count] == 43 || str[count] == 45)
+	{
+		if (str[count] == 45)
+			signo *= -1;
+		count++;
+	}
+	while (str[count] >= '0' && str[count] <= '9')
+	{
+		buffer = (str[count] - '0') + (buffer * 10);
+		count++;
+	}
+	return (signo * buffer);
+}

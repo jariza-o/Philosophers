@@ -28,6 +28,8 @@ void	arguments_checker(char **str)
 			else
 				ft_errors(ARGUMENTS_FAIL);
 		}
+		if (ft_atol(str[i]) > 2147483647)
+			ft_errors(ARGUMENTS_FAIL);
 		i++;
 	}
 	if (i != 5 && i != 6)
